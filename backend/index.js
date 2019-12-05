@@ -3,6 +3,8 @@ const port = 8000
 
 
 var app = require("express")();
+var cors = require('cors');
+app.use(cors({credentials: true, origin: true}));
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
