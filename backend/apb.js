@@ -1,3 +1,5 @@
+
+const TABLE_NAME = "Apb";
 const dynamo = require('./dynamo.js');
 const uuidv1 = require('uuid/v1');
 
