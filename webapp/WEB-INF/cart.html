@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/comboTreePlugin.css">
 
     <link rel="stylesheet" href="css/aos.css">
 
@@ -56,7 +57,6 @@
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
-			<h1>{{ cartItems }}</h1>
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
@@ -111,46 +111,112 @@
 						    </thead>
 						    <tbody id="cartTableBody">
 						      <tr class="text-center">
-						        <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
-						        
-						        <td class="image-prod"><div class="img" style="background-image:url(images/product-3.jpg);"></div></td>
-						        
-						        <td class="product-name">
-						        	<h3>Bell Pepper</h3>
-						        	<p>Far far away, behind the word mountains, far from the countries</p>
-						        </td>
-						        
-						        <td class="price">$4.90</td>
-						        
-						        <td class="quantity">
-						        	<div class="input-group mb-3">
-					             	<input type="text" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
-					          	</div>
-					          </td>
-						        
-						        <td class="total">$4.90</td>
-						      </tr><!-- END TR-->
+								  <td>
+									  <h3> Daily Essentials </h3>
+									  Subscription Type:
+									  <select>
+										  <option value="daily">Daily</option>
+										  <option value="weekly">Weekly</option>
+										  <option value="biweekly">Biweekly</option>
+										  <option value="monthly">Monthly</option>
+									  </select>
+									  Exclude Days:
+									  <input type="text" id="example1" class="combo-tree" placeholder="Select">
+									  Timings:
+									  <select>
+										  <option value="8am10am">8 am - 10 am</option>
+										  <option value="10am12noon">10 am - 12 noon</option>
+										  <option value="12noon2pm">12 noon - 2 pm</option>
+										  <option value="2pm4pm">2 pm - 4 pm</option>
+									  </select>
+									  <table>
+										  <tr class="text-center">
+											  <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
 
-						      <tr class="text-center">
-						        <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
-						        
-						        <td class="image-prod"><div class="img" style="background-image:url(images/product-4.jpg);"></div></td>
-						        
-						        <td class="product-name">
-						        	<h3>Bell Pepper</h3>
-						        	<p>Far far away, behind the word mountains, far from the countries</p>
-						        </td>
-						        
-						        <td class="price">$15.70</td>
-						        
-						        <td class="quantity">
-						        	<div class="input-group mb-3">
-					             	<input type="text" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
-					          	</div>
-					          </td>
-						        
-						        <td class="total">$15.70</td>
+											  <td class="image-prod"><div class="img" style="background-image:url(images/product-3.jpg);"></div></td>
+
+											  <td class="product-name">
+												  <h3>Milk</h3>
+												  <p>Fresh and Toned</p>
+											  </td>
+
+											  <td class="price">$21</td>
+
+											  <td class="quantity">
+												  <div class="input-group mb-3">
+													  <input type="text" name="quantity" class="quantity form-control input-number" value="2" min="1" max="100">
+												  </div>
+											  </td>
+
+											  <td class="total">$4.90</td>
+										  </tr>
+									  </table>
+								  </td>
 						      </tr><!-- END TR-->
+							  <tr class="text-center">
+								  <td>
+									  <h3> Groceries </h3>
+									  Subscription Type:
+									  <select>
+										  <option value="daily">Daily</option>
+										  <option value="weekly">Weekly</option>
+										  <option value="biweekly">Biweekly</option>
+										  <option value="monthly">Monthly</option>
+									  </select>
+									  Exclude Days:
+									  <input type="text" id="example2" class="combo-tree" placeholder="Select">
+									  Timings:
+									  <select>
+										  <option value="8am10am">8 am - 10 am</option>
+										  <option value="10am12noon">10 am - 12 noon</option>
+										  <option value="12noon2pm">12 noon - 2 pm</option>
+										  <option value="2pm4pm">2 pm - 4 pm</option>
+									  </select>
+									  <table>
+										  <tr class="text-center">
+											  <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
+
+											  <td class="image-prod"><div class="img" style="background-image:url(images/product-3.jpg);"></div></td>
+
+											  <td class="product-name">
+												  <h3>Green Peas</h3>
+												  <p>Far far away, behind the word mountains, far from the countries</p>
+											  </td>
+
+											  <td class="price">$4.90</td>
+
+											  <td class="quantity">
+												  <div class="input-group mb-3">
+													  <input type="text" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
+												  </div>
+											  </td>
+
+											  <td class="total">$4.90</td>
+										  </tr><!-- END TR-->
+
+										  <tr class="text-center">
+											<td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
+
+											<td class="image-prod"><div class="img" style="background-image:url(images/product-4.jpg);"></div></td>
+
+											<td class="product-name">
+												<h3>Bell Pepper</h3>
+												<p>Far far away, behind the word mountains, far from the countries</p>
+											</td>
+
+											<td class="price">$15.70</td>
+
+											<td class="quantity">
+												<div class="input-group mb-3">
+												<input type="text" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
+											</div>
+										  </td>
+
+											<td class="total">$15.70</td>
+										  </tr><!-- END TR-->
+									  </table>
+								  </td>
+							  </tr>
 						    </tbody>
 						  </table>
 					  </div>
@@ -333,8 +399,10 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="js/google-map.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/comboTreePlugin.js"></script>
 
-  <script>
+
+		<script>
 		$(document).ready(function(){
 
 		var quantitiy=0;
@@ -367,8 +435,46 @@
 		            $('#quantity').val(quantity - 1);
 		            }
 		    });
-		    
+
+			var myData = [
+				{
+				  id: 'monday',
+				  title: 'Monday'
+				}, {
+				  id: 'tuesday',
+				  title: 'Tuesday'
+				}, {
+				  id: 'wednesday',
+				  title: 'Wednesday'
+				}, {
+				  id: 'thursday',
+				  title: 'Thursday'
+				}, {
+				  id: 'friday',
+				  title: 'Friday'
+				}, {
+				  id: 'saturday',
+				  title: 'Saturday'
+				}, {
+				  id: 'sunday',
+				  title: 'Sunday'
+				}
+			];
+			$('.combo-tree').comboTree({
+			  source : myData,
+			  isMultiple: true
+			});
+
+			var instance = $('.combo-tree').comboTree({
+				source : myData
+			});
+
+			//instance.getSelectedItemsTitle();
+			//instance..getSelectedItemsId();
 		});
+
+
+
 	</script>
     
   </body>
