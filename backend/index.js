@@ -23,6 +23,6 @@ const getAllItemsViewRequestHandler = (request, response) => {
 }
 
 
-app.listen(port, () => console.info('Application running on port 8000'));
+app.listen(process.env.PORT || port, () => console.info('Application running on port 8000'));
 
 app.get('/getAllItems', getAllItemsViewRequestHandler);
