@@ -6,13 +6,13 @@ const apb = require('./apb.js');
 const dynamoConfig = require("./dynamoConfig.js");
 const uuidv1 = require('uuid/v1');
 const telegram = require('./telegram.js');
+const whatsapp = require('./whatsapp.js');
 
 
 const subscriptionManager = require('./subscriptionManager.js');
 
 var docClient = new AWS.DynamoDB.DocumentClient();
 
-apb.addMoney("user", 100, function(data) {});
 var items = [
   {
     asin : 'asin1',
@@ -39,17 +39,20 @@ var subscriptionData = {
   "items" : [
     {
       "asin" : "EGG",
+      "itemName" : "Egg",
       "quantity" : 2,
       "price" : 20.4
     },
     {
       "asin" : "milk",
+      "itemName" : "Milk",
       "quantity" : 1,
       "price" : 12.4
     }
   ]
 
 }
+
 
 
 subscriptionManager.createSubscription(subscriptionData);
@@ -70,7 +73,22 @@ setTimeout(function() {
 
 } , 2000);
 
+function getItemDisplay(subscription) {
+  var itemstr = "";
+  for(var i=0;i<subscription.items.length;i++) {
+    itemstr = itemstr + subscription.items[i].itemName;
+    if(i!=subscription.items.length -1)
+     itemstr = itemstr + ","
+  }
+  return itemstr;
+}
+
+
 function notifyCustomerForOrderUpdate(subscription) {
+
+  var messageString = "Your subscription for " + getItemDisplay(subscription) + " will be delivered in the next 1 hours." +
+  "\n:thumbs Reply 1 to cancel the order.\nReply 2 to continue the order."
+  whatsapp.sendMessage(messageString);
 
 }
 
@@ -87,9 +105,11 @@ function placeOrder(subscription) {
     }
   );
 
-    telegram.sendMessage("Your order with orderID "  + orderId + "is on the way" + " Your order is expected to be delivered in next 1 hour");
+    //telegram.sendMessage("Your order with orderID "  + orderId + "is on the way" + " Your order is expected to be delivered in next 1 hour");
   }
   );
+
+  notifyCustomerForOrderUpdate(subscription)
   //deduct money.
   //notify customer of order placement.
 

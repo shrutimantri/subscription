@@ -10,6 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 var request = require("request");
 const  getAllItemsViewHandler = require("./getAllItemsViewManger");
+const subscriptionManager = require('./subscriptionManager.js');
 
 
 const requestHandler = (request, response) => {
@@ -26,7 +27,7 @@ const getAllItemsViewRequestHandler = (request, response) => {
 
 const receiveMessageHandler = (request, response) => {
   console.log(request.url)
-  console.log(JSON.stringify(request));
+  console.log(JSON.stringify(request.body));
   var testResponse = {
     "test" : "testSuccess"
   }
@@ -36,12 +37,23 @@ const receiveMessageHandler = (request, response) => {
 
 const callbackMessageHandler = (request, response) => {
   console.log(request.url)
-  console.log(JSON.stringify(request));
+  console.log(JSON.stringify(request.body));
   var testResponse = {
     "test" : "testSuccess"
   }
   response.status(200).send(JSON.stringify(testResponse));
   console.log("Response object " + response);
+}
+
+const createSubscriptionHandler = (request, response) => {
+  console.log(request.url)
+  console.log(JSON.stringify(request.body));
+
+  subscriptionManager.createSubscription(request.body)
+  var testResponse = {
+    "createsubscription" : "testSuccess"
+  }
+  response.status(200).send(JSON.stringify(testResponse));
 }
 
 
@@ -52,3 +64,5 @@ app.get('/getAllItems', getAllItemsViewRequestHandler);
 app.post('/receiveMessage', receiveMessageHandler);
 
 app.post('/callbackMessage', callbackMessageHandler);
+
+app.post('/createSubscription', createSubscriptionHandler)
