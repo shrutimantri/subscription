@@ -15,6 +15,7 @@ const requestHandler = (request, response) => {
   response.end('Hello Node.js Server!')
 }
 
+<<<<<<< HEAD
 const getAllItemsViewRequestHandler = (request, response) => {
   console.log(request.url)
   console.log(JSON.stringify(getAllItemsViewHandler.InventoryListing));
@@ -22,6 +23,14 @@ const getAllItemsViewRequestHandler = (request, response) => {
   console.log("Response object " + response);
 }
 
+=======
+app.get('/items', (req, res) => {
+    console.log("called");
+    res.send("items");
+});
+
+const server = http.createServer(requestHandler)
+>>>>>>> b425ac6dfb9becc4efbaf6bfc0664b2af5d14e11
 
 app.listen(port, () => console.info('Application running on port 8000'));
 
