@@ -7,7 +7,7 @@
     "SATURDAY"
   ]
   "deliverySlotStartTime" : 1575536122,
-  "categoty" : "DAILY_ESSENTIALS",
+  "category" : "DAILY_ESSENTIALS",
   "items" : [
     {
       "asin" : "EGG",
