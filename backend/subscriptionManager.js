@@ -41,6 +41,11 @@ function createSubscription(subscription) {
 //Save in dynamo.
   subscription.nextOrderPlaceDate = (new Date()).getTime();
   subscription.numOfOrder = 0;
+  var totalCost = 0;
+  for(var i=0; i<subscription.items.length;i++) {
+    totalCost += subscription.items[i].quantity* subscription.items[i].price;
+  }
+  subscription.total = totalCost;
   persistSubscription(subscription, function(data) {});
   //notifyUser(subscription);
 
