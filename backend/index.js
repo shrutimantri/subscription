@@ -1,7 +1,13 @@
 const http = require('http')
 const port = 8000
 
-var express = require('express')
+
+var app = require("express")();
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
+var request = require("request");
+const  getAllItemsViewHandler = require("./getAllItemsViewManger");
 
 
 const requestHandler = (request, response) => {
@@ -9,12 +15,14 @@ const requestHandler = (request, response) => {
   response.end('Hello Node.js Server!')
 }
 
-const server = http.createServer(requestHandler)
+const getAllItemsViewRequestHandler = (request, response) => {
+  console.log(request.url)
+  console.log(JSON.stringify(getAllItemsViewHandler.InventoryListing));
+  response.status(200).send(JSON.stringify(getAllItemsViewHandler.InventoryListing));
+  console.log("Response object " + response);
+}
 
-server.listen(port, (err) => {
-  if (err) {
-    return console.log('something bad happened', err)
-  }
 
-  console.log(`server is listening on ${port}`)
-})
+app.listen(port, () => console.info('Application running on port 8000'));
+
+app.get('/getAllItems', getAllItemsViewRequestHandler);
