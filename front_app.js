@@ -1,4 +1,5 @@
 const express = require('express');
+const http = require('http');
 const app = express();
     app.set("view options", {layout: false});
     app.use(express.static(__dirname + '/webapp/WEB-INF'));
@@ -34,10 +35,6 @@ app.post("/api/cartItem", (req, res) => {
 	res.send(cartItem);
 });
 
-app.get("/items", (req, res) => {
-    items = res.items;
-});
-
 app.get("/", function(request, response){
       //response.send("<h1 style='text-align:center'>Hey Friends, welcome to subscription<h1>");
       response.render('/webapp/WEB-INF/index.html');
@@ -45,8 +42,37 @@ app.get("/", function(request, response){
 
 //app.use("/cart.html", cartItems);
 app.get("/cart.html", function(request, response){
+    console.log("cart page");
     response.render('/webapp/WEB-INF/cart.html', cartItems);
 })
+
+var extServerOptions = {
+    host: 'localhost',
+    port: '8000',
+    path: '/getAllItems',
+    method: 'GET'
+};
+
+function get() {
+    http.request(extServerOptions, function (res) {
+        res.setEncoding('utf8');
+        res.on('data', function (data) {
+            items = JSON.parse(data);
+            console.log("got items");
+        });
+ 
+    }).end();
+};
+
+
+get();
+
+function renderGrocery() {
+    console.log("renderGrocery worked");
+    var groceryRow = window.document.getElementById("groceryRow");
+    groceryRow.innerHTML += '<div class="col-md-6 col-lg-3 ftco-animate fadeInUp ftco-animated"><div class="product"><a href="#" class="img-prod"><img class="img-fluid" src="images/product-3.jpg" alt="Colorlib Template"><div class="overlay"></div></a><div class="text py-3 pb-4 px-3 text-center"><h3><a href="#">Green Beans</a></h3><div class="d-flex"><div class="pricing"><p class="price"><span>$120.00</span></p></div></div><div class="bottom-area d-flex px-3"><div class="m-auto d-flex"><a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center"><span><i class="ion-ios-menu"></i></span></a><a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1"><span><i class="ion-ios-cart"></i></span></a><a href="#" class="heart d-flex justify-content-center align-items-center "><span><i class="ion-ios-heart"></i></span></a></div></div></div></div></div>'
+}
+
 
 app.listen(8080, function(error){
     if(error == true) {
