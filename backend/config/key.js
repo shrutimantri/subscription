@@ -6,5 +6,8 @@ module.exports = {
   mongoUri: 'mongodb://debarghy:password123@ds239940.mlab.com:39940/emaily-debarghy',
   cookieKey: 'efergryyhrytdfhgthtfhnjgntdgbdrtgbntyjntybvfrbtynyun',
   awsAccessKeyId: 'AKIAICT757BCR7J7RXBA',
-  awsSecretKey : '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'
+  awsSecretKey : '4kM9FRkS5h1Ydymg4HS8g4mFdxGw5Hs8T0v+sJXJ',
+  SID : 'AC3998f65824129f7532f07178cfdbd812',
+  KEY : 'c88a4c32e9cf387ad7da537232d26c79'
+
 }
