@@ -12,10 +12,11 @@ const subscriptionManager = require('./subscriptionManager.js');
 
 var docClient = new AWS.DynamoDB.DocumentClient();
 
+apb.addMoney("user", 100, function(data) {});
 var items = [
   {
     asin : 'asin1',
-    price : 200
+    price : 200,
   },
   {
     asin : 'asin2',
@@ -38,7 +39,7 @@ var subscriptionData = {
   "items" : [
     {
       "asin" : "EGG",
-      "quantity" : 10,
+      "quantity" : 2,
       "price" : 20.4
     },
     {
@@ -52,19 +53,22 @@ var subscriptionData = {
 
 
 subscriptionManager.createSubscription(subscriptionData);
+setTimeout(function() {
+  subscriptionManager.fetchAllSubscriptions(function(subscriptionList) {
+        //for all subscriptions which are in next 1 min, check if next order is scheduled then place order.
+        //
 
-subscriptionManager.fetchAllSubscriptions(function(subscriptionList) {
-      //for all subscriptions which are in next 1 min, check if next order is scheduled then place order.
-      //
+        subscriptionList.forEach(function(subscription){
+          var timeNow = (new Date()).getTime();
+          console.log('NEXT ORDER PLACE TIME ' + subscription.nextOrderPlaceDate +  "TIME NOW " + timeNow + " FOR " + subscription);
+          if(subscription.nextOrderPlaceDate < timeNow) {
+            placeOrder(subscription);
+          }
+      });
+  });
 
-      subscriptionList.forEach(function(subscription){
-        var timeNow = (new Date()).getTime();
-        console.log('NEXT ORDER PLACE TIME ' + subscription.nextOrderPlaceDate +  "TIME NOW " + timeNow + " FOR " + subscription);
-        if(subscription.nextOrderPlaceDate < timeNow) {
-          placeOrder(subscription);
-        }
-    });
-});
+
+} , 2000);
 
 function notifyCustomerForOrderUpdate(subscription) {
 
@@ -76,11 +80,15 @@ function placeOrder(subscription) {
   //generateOrderId
   var orderId = generateOrderId();
   updateSubscriptionWithOrderDetails(subscription, orderId, (new Date()).getTime(), nextOrderDate((new Date()).getTime()),
-  function(data) {
-    apb.deductMoney(subscription.userId, subscription.total, function(data) {});
+  function(data1) {
+
+    apb.deductMoney(subscription.userId, subscription.total, function(data2) {
 
     }
-    telegram.sendMessage("Your order with orderID "  + orderId "is on the way" + " Your order is expected to be delivered in next 1 hour");
+  );
+
+    telegram.sendMessage("Your order with orderID "  + orderId + "is on the way" + " Your order is expected to be delivered in next 1 hour");
+  }
   );
   //deduct money.
   //notify customer of order placement.
@@ -96,12 +104,12 @@ function generateOrderId() {
 }
 
 function updateSubscriptionWithOrderDetails(subscription, orderId, orderDate, nextOrderDate, callback) {
-
   subscription.numOfOrder = subscription.numOfOrder + 1;
   subscription.nextOrderPlaceDate = nextOrderDate;
   subscription.lastOrderDate = orderDate;
-
-  persistSubscription(subscription, function(data) {
+  subscription.lastOrderId = orderId;
+  console.log("SAving " + JSON.stringify(subscription));
+  subscriptionManager.persistSubscription(subscription, function(data) {
     callback(data);
   })
 
