@@ -5,10 +5,15 @@ const app = express();
 
 var fs = require('fs');
 var sys = require('sys');
+var cartItems =
 
 app.get("/", function(request, response){
-    //response.send("<h1 style='text-align:center'>Hey Friends, welcome to subscription<h1>");
-    response.render('/webapp/WEB-INF/index.html');
+      //response.send("<h1 style='text-align:center'>Hey Friends, welcome to subscription<h1>");
+      response.render('/webapp/WEB-INF/index.html');
+})
+
+app.get("/cart.html", function(request, response){
+    response.render('/webapp/WEB-INF/cart.html');
 })
 
 app.listen(8080, function(error){
