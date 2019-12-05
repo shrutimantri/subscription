@@ -14,7 +14,7 @@ function Inventory(asin, itemName, qty, price, quantity, category) {
 function loadInventory() {
   var obj = csv();
 
-  obj.from.path("./inventory.csv").to.array(function(data) {
+  obj.from.path("backend/inventory.csv").to.array(function(data) {
     for (var index = 0; index < data.length; index++) {
       var inventory = new Inventory(
         data[index][0],
