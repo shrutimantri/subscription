@@ -47,6 +47,6 @@ app.listen(process.env.PORT || port, () => console.info('Application running on 
 
 app.get('/getAllItems', getAllItemsViewRequestHandler);
 
-app.get('/receiveMessage', receiveMessageHandler);
+app.post('/receiveMessage', receiveMessageHandler);
 
-app.get('/callbackMessage', callbackMessageHandler);
+app.post('/callbackMessage', callbackMessageHandler);
