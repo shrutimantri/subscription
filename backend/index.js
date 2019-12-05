@@ -22,7 +22,31 @@ const getAllItemsViewRequestHandler = (request, response) => {
   console.log("Response object " + response);
 }
 
+const receiveMessageHandler = (request, response) => {
+  console.log(request.url)
+  console.log(JSON.stringify(request));
+  var testResponse = {
+    "test" : "testSuccess"
+  }
+  response.status(200).send(JSON.stringify(testResponse));
+  console.log("Response object " + response);
+}
+
+const callbackMessageHandler = (request, response) => {
+  console.log(request.url)
+  console.log(JSON.stringify(request));
+  var testResponse = {
+    "test" : "testSuccess"
+  }
+  response.status(200).send(JSON.stringify(testResponse));
+  console.log("Response object " + response);
+}
+
 
 app.listen(process.env.PORT || port, () => console.info('Application running on port 8000'));
 
 app.get('/getAllItems', getAllItemsViewRequestHandler);
+
+app.get('/receiveMessage', receiveMessageHandler);
+
+app.get('/callbackMessage', callbackMessageHandler);
