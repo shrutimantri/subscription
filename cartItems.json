@@ -1,0 +1,28 @@
+{
+  "DAILY_ESSENTIALS": [
+    {
+      "name": "Toned Milk",
+      "quantity": 2,
+      "pricePerUnit": 21
+    },
+    {
+      "name": "Eggs",
+      "quantity": 6,
+      "pricePerUnit": 6
+    }
+  ],
+  "GROCERY": [
+    {
+      "name": "Toned Milk",
+      "quantity": 2,
+      "pricePerUnit": 21
+    },
+    {
+      "name": "Toned Milk",
+      "quantity": 2,
+      "pricePerUnit": 21
+    }
+  ],
+  "RESTAURANTS":[],
+  "MEDICINES":[]
+}
