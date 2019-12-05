@@ -2,9 +2,10 @@ var csv = require("csv");
 var InventoryMap = {};
 var InventoryListing = [];
 loadInventory();
-function Inventory(asin, itemName, price, quantity, category) {
+function Inventory(asin, itemName, qty, price, quantity, category) {
   this.asin = asin.trim();
   this.itemName = itemName.toLowerCase().trim();
+  this.qty = qty.trim();
   this.price = price.trim();
   this.quantity = quantity.trim();
   this.category = category.trim();
@@ -20,7 +21,8 @@ function loadInventory() {
         data[index][1],
         data[index][2],
         data[index][3],
-        data[index][4]
+        data[index][4],
+        data[index][5]
       );
 
 
