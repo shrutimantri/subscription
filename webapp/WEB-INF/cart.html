@@ -56,6 +56,7 @@
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
+			<h1>{{ cartItems }}</h1>
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
@@ -108,7 +109,7 @@
 						        <th>Total</th>
 						      </tr>
 						    </thead>
-						    <tbody>
+						    <tbody id="cartTableBody">
 						      <tr class="text-center">
 						        <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
 						        
@@ -316,6 +317,7 @@
 
 
   <script src="js/jquery.min.js"></script>
+  <script src="js/cart.js"></script>
   <script src="js/jquery-migrate-3.0.1.min.js"></script>
   <script src="js/popper.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
