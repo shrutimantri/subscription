@@ -1,3 +1,5 @@
+
+const TABLE_NAME = "Apb";
 function addMoney(user, amount, callback) {
 
 }
