@@ -1,0 +1,20 @@
+{
+  "userId" : "user",
+  "creationDate" : 1575536122,
+  "orderIntervalInDays" : 1,
+  "deliverySlotStartTime" : 1575536122,
+  "categoty" : "DAILY_ESSENTIALS",
+  "items" : [
+    {
+      "asin" : "EGG",
+      "quantity" : 10,
+      "price" : 20.4
+    },
+    {
+      "asin" : "milk",
+      "quantity" : 1,
+      "price" : 12.4
+    }
+  ]
+
+}
