@@ -2,8 +2,12 @@
   "userId" : "user",
   "creationDate" : 1575536122,
   "orderIntervalInDays" : 1,
+  "excludeDays" : [
+    "SUNDAY",
+    "SATURDAY"
+  ]
   "deliverySlotStartTime" : 1575536122,
-  "categoty" : "DAILY_ESSENTIALS",
+  "category" : "DAILY_ESSENTIALS",
   "items" : [
     {
       "asin" : "EGG",
