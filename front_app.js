@@ -4,6 +4,7 @@ const app = express();
     app.use(express.static(__dirname + '/webapp/WEB-INF'));
     app.use(express.json());
 var cartItems = [];
+var items = [];
 var fs = require('fs');
 var sys = require('sys');
 //var cartItems = "{\"DAILY_ESSENTIALS\":[{\"name\":\"Toned Milk\",\"quantity\":2,\"pricePerUnit\":21},{\"name\":\"Eggs\",\"quantity\":6,\"pricePerUnit\":6}],\"GROCERY\":[{\"name\":\"Toned Milk\",\"quantity\":2,\"pricePerUnit\":21},{\"name\":\"Toned Milk\",\"quantity\":2,\"pricePerUnit\":21}],\"RESTAURANTS\":[],\"MEDICINES\":[]}";
@@ -31,6 +32,10 @@ app.post("/api/cartItem", (req, res) => {
 	cartItems.push(cartItem);
 	console.log(cartItems);
 	res.send(cartItem);
+});
+
+app.get("/items", (req, res) => {
+    items = res.items;
 });
 
 app.get("/", function(request, response){

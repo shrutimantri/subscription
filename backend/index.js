@@ -9,6 +9,11 @@ const requestHandler = (request, response) => {
   response.end('Hello Node.js Server!')
 }
 
+app.get('/items', (req, res) => {
+    console.log("called");
+    res.send("items");
+});
+
 const server = http.createServer(requestHandler)
 
 server.listen(port, (err) => {
