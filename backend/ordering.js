@@ -134,7 +134,7 @@ function placeOrder(subscription) {
 
     }
   );
-  var messageString = "Your order is on your way for delivery and is expected to reach by 4:30 PM today."
+  var messageString = "Your order is on your way for delivery and is expected to reach by 5:00 PM today."
 
   whatsapp.sendMessage(messageString);
 
