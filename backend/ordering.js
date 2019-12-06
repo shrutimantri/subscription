@@ -97,7 +97,7 @@ function getItemDisplay(subscription) {
 function notifyCustomerForOrderUpdate(subscription) {
 
   var messageString = "Your subscription for " + getItemDisplay(subscription) + " is ready to be shipped in the next 1 hours." +
-  "\nReply 1 to cancel the order.\nReply 2 to continue the order."
+  "\nReply 1 to continue with the order.\nReply 2 to cancel the order."
   store.set('communicationSubscription', subscription);
   updateSubscriptionWithNotification(subscription, function(data) {})
   whatsapp.sendMessage(messageString);
@@ -106,9 +106,15 @@ function notifyCustomerForOrderUpdate(subscription) {
 
 function notifyOnWhatsappResponse(whatsAppResponse) {
   setTimeout(function() {
-    if(whatsAppResponse == "1") {
+    if(whatsAppResponse == "2") {
       var messageString = "We have cancelled your order succesfuly."
       whatsapp.sendMessage(messageString);
+      var lastSubscription = store.get("communicationSubscription")
+      updateSubscriptionWithOrderDetails(lastSubscription, "orderId" , 1),
+      function(data) {
+
+      });
+
     } else {
       var messageString = "We will process your order shortly."
       whatsapp.sendMessage(messageString);
@@ -121,7 +127,7 @@ function placeOrder(subscription) {
   console.log("Placing order for " + subscription);
   //generateOrderId
   var orderId = generateOrderId();
-  updateSubscriptionWithOrderDetails(subscription, orderId, (new Date()).getTime(), nextOrderDate((new Date()).getTime() , subscription.orderIntervalInDays),
+  updateSubscriptionWithOrderDetails(subscription, orderId , subscription.orderIntervalInDays),
   function(data1) {
 
     apb.deductMoney(subscription.userId, subscription.total, function(data2) {
@@ -153,11 +159,11 @@ function updateSubscriptionWithNotification(subscription, callback) {
   })
 }
 
-function updateSubscriptionWithOrderDetails(subscription, orderId, orderDate, nextOrderDate, callback) {
+function updateSubscriptionWithOrderDetails(subscription, orderId, callback) {
   subscription.numOfOrder = subscription.numOfOrder + 1;
   //subscription.nextOrderCutoffDate = nextOrderDate;
   subscription.nextOrderPlaceDate = ((new Date).getTime())+ 60 * 60 * 1000;;
-  subscription.lastOrderDate = orderDate;
+  subscription.lastOrderDate = ((new Date).getTime());
   subscription.lastOrderId = orderId;
   console.log("SAving " + JSON.stringify(subscription));
   subscriptionManager.persistSubscription(subscription, function(data) {
