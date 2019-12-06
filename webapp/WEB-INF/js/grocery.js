@@ -16,7 +16,7 @@ function mycallback(data) {
    renderPage(data);
 }
 
-getText('http://localhost:8000/getAllItems', mycallback);
+getText('https://serene-mesa-07102.herokuapp.com/getAllItems', mycallback);
 
 
 function renderPage(data) {

@@ -70,7 +70,8 @@ function renderMPage() {
     list1 = mList;
     ele = document.getElementById('medicineCartId');
     for(var i = 0; i < list1.length; ++i) {
-        ele.innerHTML += '<table><tr class="text-center"><td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td><td class="image-prod"><div class="img" style="background-image:url(images/product-3.jpg);"></div></td><td class="product-name"><h3>'+
+        ele.innerHTML += '<table><tr class="text-center"><td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td><td class="image-prod"><div class="img" style="background-image:url(images/'+
+        list1[i]['asin']+'.jpeg);"></div></td><td class="product-name"><h3>'+
         list1[i]['itemName']+'</h3><p>Item Description</p></td><td class="price">$'+
         list1[i]['price']+'</td><td class="quantity"><div class="input-group mb-3"><input type="text" name="quantity" class="quantity form-control input-number" value='+
         list1[i]['quantity']+' min="1" max="100"></div></td><td class="total">$4.90</td></tr></table>';
@@ -82,10 +83,12 @@ function renderRPage() {
     list1 = rList;
     ele = document.getElementById('restaurantsCartId');
     for(var i = 0; i < list1.length; ++i) {
-        ele.innerHTML += '<table><tr class="text-center"><td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td><td class="image-prod"><div class="img" style="background-image:url(images/product-3.jpg);"></div></td><td class="product-name"><h3>'+
+        ele.innerHTML += '<table><tr class="text-center"><td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td><td class="image-prod"><div class="img" style="background-image:url(images/'+
+        list1[i]['asin']+'.jpeg);"></div></td><td class="product-name"><h3>'+
         list1[i]['itemName']+'</h3><p>Item Description</p></td><td class="price">$'+
         list1[i]['price']+'</td><td class="quantity"><div class="input-group mb-3"><input type="text" name="quantity" class="quantity form-control input-number" value='+
-        list1[i]['quantity']+' min="1" max="100"></div></td><td class="total">$4.90</td></tr></table>';    }
+        list1[i]['quantity']+' min="1" max="100"></div></td><td class="total">$4.90</td></tr></table>';
+        }
 
 }
 
@@ -93,19 +96,23 @@ function renderGPage() {
     list1 = gList;
     ele = document.getElementById('groceryCartId');
     for(var i = 0; i < list1.length; ++i) {
-        ele.innerHTML += '<table><tr class="text-center"><td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td><td class="image-prod"><div class="img" style="background-image:url(images/product-3.jpg);"></div></td><td class="product-name"><h3>'+
+        ele.innerHTML += '<table><tr class="text-center"><td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td><td class="image-prod"><div class="img" style="background-image:url(images/'+
+        list1[i]['asin']+'.jpeg);"></div></td><td class="product-name"><h3>'+
         list1[i]['itemName']+'</h3><p>Item Description</p></td><td class="price">$'+
         list1[i]['price']+'</td><td class="quantity"><div class="input-group mb-3"><input type="text" name="quantity" class="quantity form-control input-number" value='+
-        list1[i]['quantity']+' min="1" max="100"></div></td><td class="total">$4.90</td></tr></table>';    }
+        list1[i]['quantity']+' min="1" max="100"></div></td><td class="total">$4.90</td></tr></table>';
+            }
 }
 function renderDePage() {
     list1 = deList;
     ele = document.getElementById('deCartId');
     for(var i = 0; i < list1.length; ++i) {
-        ele.innerHTML += '<table><tr class="text-center"><td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td><td class="image-prod"><div class="img" style="background-image:url(images/product-3.jpg);"></div></td><td class="product-name"><h3>'+
+        ele.innerHTML += '<table><tr class="text-center"><td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td><td class="image-prod"><div class="img" style="background-image:url(images/'+
+        list1[i]['asin']+'.jpeg);"></div></td><td class="product-name"><h3>'+
         list1[i]['itemName']+'</h3><p>Item Description</p></td><td class="price">$'+
         list1[i]['price']+'</td><td class="quantity"><div class="input-group mb-3"><input type="text" name="quantity" class="quantity form-control input-number" value='+
-        list1[i]['quantity']+' min="1" max="100"></div></td><td class="total">$4.90</td></tr></table>';    }
+        list1[i]['quantity']+' min="1" max="100"></div></td><td class="total">$4.90</td></tr></table>';
+            }
 }
 
 function getAsinList() {
@@ -179,7 +186,7 @@ function placeOrderCall(data) {
       }
     });
 
-    xhr.open("POST", "http://localhost:8000/createSubscription");
+    xhr.open("POST", "https://serene-mesa-07102.herokuapp.com/createSubscription");
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.setRequestHeader("Accept", "*/*");
     xhr.setRequestHeader("Cache-Control", "no-cache");
