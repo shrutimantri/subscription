@@ -159,7 +159,7 @@ function updateSubscriptionWithNotification(subscription, callback) {
   })
 }
 
-function updateSubscriptionWithOrderDetails(subscription, orderId, callback) {
+function updateSubscriptionWithOrderDetails(subscription, orderId, intervalInDays, callback) {
   subscription.numOfOrder = subscription.numOfOrder + 1;
   //subscription.nextOrderCutoffDate = nextOrderDate;
   subscription.nextOrderPlaceDate = ((new Date).getTime())+ 60 * 60 * 1000;;
