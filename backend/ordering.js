@@ -65,16 +65,18 @@ function callEvery2Seconds(i) {
         subscriptionManager.fetchAllSubscriptions(function(subscriptionList) {
               //for all subscriptions which are in next 1 min, check if next order is scheduled then place order.
               //
-
-              subscriptionList.forEach(function(subscription){
-                var timeNow = (new Date()).getTime();
-                console.log('NEXT ORDER PLACE TIME ' + subscription.nextOrderCutoffDate +  "TIME NOW " + timeNow + " FOR " + subscription);
-                if(subscription.nextOrderCutoffDate < timeNow) {
-                  notifyCustomerForOrderUpdate(subscription)
-                } else if(subscription.nextOrderPlaceDate < timeNow) {
-                  placeOrder(subscription);
-                }
-            });
+              if(subscriptionList != null) {
+                subscriptionList.forEach(function(subscription) {
+                  var timeNow = (new Date()).getTime();
+                  console.log('NEXT ORDER PLACE TIME ' + subscription.nextOrderCutoffDate +  "TIME NOW " + timeNow + " FOR " + subscription);
+                  if(subscription.nextOrderCutoffDate < timeNow) {
+                    notifyCustomerForOrderUpdate(subscription)
+                  } else if(subscription.nextOrderPlaceDate < timeNow) {
+                    placeOrder(subscription);
+                  }
+              });
+                
+              }
         });
 
         callEvery2Seconds(++i);
