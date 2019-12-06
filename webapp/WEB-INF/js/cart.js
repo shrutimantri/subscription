@@ -8,28 +8,6 @@ var rList;
 var mList; 
 
 
-getText = function(url, callback) // How can I use this callback?
-{
-    var request = new XMLHttpRequest();
-    request.onreadystatechange = function()
-    {
-        if (request.readyState == 4 && request.status == 200)
-        {
-            callback(request.responseText); // Another callback here
-        }
-    }; 
-    request.open('GET', url);
-    request.send();
-}
-
-function mycallback(data) {
-   console.log("mycallback called");
-   balance = JSON.parse(data)
-   document.getElementById("aPayBalance").innerHTML = balance["balance"];
-}
-
-getText('https://serene-mesa-07102.herokuapp.com/balance', mycallback);
-
     
 var gData = {
   "userId": "user",
@@ -104,9 +82,9 @@ function renderMPage() {
     for(var i = 0; i < list1.length; ++i) {
         ele.innerHTML += '<table><tr class="text-center"><td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td><td class="image-prod"><div class="img" style="background-image:url(images/'+
         list1[i]['asin']+'.jpeg);"></div></td><td class="product-name"><h3>'+
-        list1[i]['itemName']+'</h3><p>Item Description</p></td><td class="price">$'+
+        list1[i]['itemName']+'</h3><p>Item Description</p></td><td class="price">₹'+
         list1[i]['price']+'</td><td class="quantity"><div class="input-group mb-3"><input type="text" name="quantity" class="quantity form-control input-number" value='+
-        list1[i]['quantity']+' min="1" max="100"></div></td><td class="total">$4.90</td></tr></table>';
+        list1[i]['quantity']+' min="1" max="100"></div></td><td class="total"></td></tr></table>';
     }
     
 }
@@ -117,9 +95,9 @@ function renderRPage() {
     for(var i = 0; i < list1.length; ++i) {
         ele.innerHTML += '<table><tr class="text-center"><td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td><td class="image-prod"><div class="img" style="background-image:url(images/'+
         list1[i]['asin']+'.jpeg);"></div></td><td class="product-name"><h3>'+
-        list1[i]['itemName']+'</h3><p>Item Description</p></td><td class="price">$'+
+        list1[i]['itemName']+'</h3><p>Item Description</p></td><td class="price">₹'+
         list1[i]['price']+'</td><td class="quantity"><div class="input-group mb-3"><input type="text" name="quantity" class="quantity form-control input-number" value='+
-        list1[i]['quantity']+' min="1" max="100"></div></td><td class="total">$4.90</td></tr></table>';
+        list1[i]['quantity']+' min="1" max="100"></div></td><td class="total"></td></tr></table>';
         }
 
 }
@@ -130,9 +108,9 @@ function renderGPage() {
     for(var i = 0; i < list1.length; ++i) {
         ele.innerHTML += '<table><tr class="text-center"><td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td><td class="image-prod"><div class="img" style="background-image:url(images/'+
         list1[i]['asin']+'.jpeg);"></div></td><td class="product-name"><h3>'+
-        list1[i]['itemName']+'</h3><p>Item Description</p></td><td class="price">$'+
+        list1[i]['itemName']+'</h3><p>Item Description</p></td><td class="price">₹'+
         list1[i]['price']+'</td><td class="quantity"><div class="input-group mb-3"><input type="text" name="quantity" class="quantity form-control input-number" value='+
-        list1[i]['quantity']+' min="1" max="100"></div></td><td class="total">$4.90</td></tr></table>';
+        list1[i]['quantity']+' min="1" max="100"></div></td><td class="total"></td></tr></table>';
             }
 }
 function renderDePage() {
@@ -141,9 +119,9 @@ function renderDePage() {
     for(var i = 0; i < list1.length; ++i) {
         ele.innerHTML += '<table><tr class="text-center"><td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td><td class="image-prod"><div class="img" style="background-image:url(images/'+
         list1[i]['asin']+'.jpeg);"></div></td><td class="product-name"><h3>'+
-        list1[i]['itemName']+'</h3><p>Item Description</p></td><td class="price">$'+
+        list1[i]['itemName']+'</h3><p>Item Description</p></td><td class="price">₹'+
         list1[i]['price']+'</td><td class="quantity"><div class="input-group mb-3"><input type="text" name="quantity" class="quantity form-control input-number" value='+
-        list1[i]['quantity']+' min="1" max="100"></div></td><td class="total">$4.90</td></tr></table>';
+        list1[i]['quantity']+' min="1" max="100"></div></td><td class="total"></td></tr></table>';
             }
 }
 
