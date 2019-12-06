@@ -3,6 +3,7 @@ const port = 8000
 
 
 var app = require("express")();
+const ordering = require('./ordering.js');
 var cors = require('cors');
 app.use(cors({credentials: true, origin: true}));
 const bodyParser = require('body-parser');
@@ -31,6 +32,7 @@ const receiveMessageHandler = (request, response) => {
   var testResponse = {
     "test" : "testSuccess"
   }
+  ordering.notifyOnWhatsappResponse(request.body.Body)
   response.status(200).send(JSON.stringify(testResponse));
   console.log("Response object " + response);
 }

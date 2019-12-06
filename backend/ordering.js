@@ -7,7 +7,7 @@ const dynamoConfig = require("./dynamoConfig.js");
 const uuidv1 = require('uuid/v1');
 const telegram = require('./telegram.js');
 const whatsapp = require('./whatsapp.js');
-
+const store = require('data-store')({ path: process.cwd() + '/foo.json' });
 
 const subscriptionManager = require('./subscriptionManager.js');
 
@@ -56,22 +56,28 @@ var subscriptionData = {
 
 
 subscriptionManager.createSubscription(subscriptionData);
-setTimeout(function() {
-  subscriptionManager.fetchAllSubscriptions(function(subscriptionList) {
-        //for all subscriptions which are in next 1 min, check if next order is scheduled then place order.
-        //
 
-        subscriptionList.forEach(function(subscription){
-          var timeNow = (new Date()).getTime();
-          console.log('NEXT ORDER PLACE TIME ' + subscription.nextOrderPlaceDate +  "TIME NOW " + timeNow + " FOR " + subscription);
-          if(subscription.nextOrderPlaceDate < timeNow) {
-            placeOrder(subscription);
-          }
-      });
-  });
+callEvery2Seconds(0);
 
+function callEvery2Seconds(i) {
+    setTimeout(() => {
+        console.log('Infinite Loop Test n:', i);
+        subscriptionManager.fetchAllSubscriptions(function(subscriptionList) {
+              //for all subscriptions which are in next 1 min, check if next order is scheduled then place order.
+              //
 
-} , 2000);
+              subscriptionList.forEach(function(subscription){
+                var timeNow = (new Date()).getTime();
+                console.log('NEXT ORDER PLACE TIME ' + subscription.nextOrderPlaceDate +  "TIME NOW " + timeNow + " FOR " + subscription);
+                if(subscription.nextOrderPlaceDate < timeNow) {
+                  placeOrder(subscription);
+                }
+            });
+        });
+
+        callEvery2Seconds(++i);
+    }, 2000)
+}
 
 function getItemDisplay(subscription) {
   var itemstr = "";
@@ -86,18 +92,32 @@ function getItemDisplay(subscription) {
 
 function notifyCustomerForOrderUpdate(subscription) {
 
-  var messageString = "Your subscription for " + getItemDisplay(subscription) + " will be delivered in the next 1 hours." +
-  "\n:thumbs Reply 1 to cancel the order.\nReply 2 to continue the order."
+  var messageString = "Your subscription for " + getItemDisplay(subscription) + " is ready to be shipped in the next 1 hours." +
+  "\nReply 1 to cancel the order.\nReply 2 to continue the order."
+  store.set('communicationSubscription', subscription);
+
   whatsapp.sendMessage(messageString);
 
 }
 
+function notifyOnWhatsappResponse(whatsAppResponse) {
+  setTimeout(function() {
+    if(whatsAppResponse == "1") {
+      var messageString = "We have cancelled your order succesfuly."
+      whatsapp.sendMessage(messageString);
+    } else {
+      var messageString = "We will process your order shortly."
+      whatsapp.sendMessage(messageString);
+    }
+  }
+   , 5000 );
+}
 
 function placeOrder(subscription) {
   console.log("Placing order for " + subscription);
   //generateOrderId
   var orderId = generateOrderId();
-  updateSubscriptionWithOrderDetails(subscription, orderId, (new Date()).getTime(), nextOrderDate((new Date()).getTime()),
+  updateSubscriptionWithOrderDetails(subscription, orderId, (new Date()).getTime(), nextOrderDate((new Date()).getTime() , subscription.orderIntervalInDays),
   function(data1) {
 
     apb.deductMoney(subscription.userId, subscription.total, function(data2) {
@@ -115,8 +135,8 @@ function placeOrder(subscription) {
 
 }
 
-function nextOrderDate(currentOrderPlaceDate) {
-  return currentOrderPlaceDate + 24 * 60 * 60 * 1000;
+function nextOrderDate(currentOrderPlaceDate, intervalDays) {
+  return currentOrderPlaceDate + intervalDays * 24 * 60 * 60 * 1000;
 }
 
 function generateOrderId() {
@@ -136,12 +156,9 @@ function updateSubscriptionWithOrderDetails(subscription, orderId, orderDate, ne
 }
 
 
-function placeOrderForSubscription(subscription) {
-  //check when to place the next order.
-  //IF weekly
-}
-
 
 function cancelNextOrder() {
 
 }
+
+module.exports.notifyOnWhatsappResponse = notifyOnWhatsappResponse;
