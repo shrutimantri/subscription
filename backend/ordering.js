@@ -110,7 +110,7 @@ function notifyOnWhatsappResponse(whatsAppResponse) {
       var messageString = "We have cancelled your order succesfuly."
       whatsapp.sendMessage(messageString);
       var lastSubscription = store.get("communicationSubscription")
-      updateSubscriptionWithOrderDetails(lastSubscription, "orderId" , 1),
+      updateSubscriptionWithOrderDetails(lastSubscription, "orderId" , 1,
       function(data) {
 
       });
