@@ -12,6 +12,7 @@ app.use(bodyParser.json())
 var request = require("request");
 const  getAllItemsViewHandler = require("./getAllItemsViewManger");
 const subscriptionManager = require('./subscriptionManager.js');
+const apb = require('./apb.js');
 
 
 const requestHandler = (request, response) => {
@@ -59,13 +60,14 @@ const createSubscriptionHandler = (request, response) => {
 }
 
 const balanceHandler = (request, response) => {
-  console.log(request.url)
   console.log(JSON.stringify(request.body));
-  var responseData = {"balance" : data};
   apb.getBalance("user", function(data) {
+    var responseData = {"balance" : data};
     response.status(200).send(JSON.stringify(responseData));
 
   })
+//  response.status(200).send(JSON.stringify("responseData"));
+
 }
 
 

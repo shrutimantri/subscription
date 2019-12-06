@@ -57,7 +57,7 @@ var subscriptionData = {
 
 //subscriptionManager.createSubscription(subscriptionData);
 
-callEvery2Seconds(0);
+//callEvery2Seconds(0);
 
 function callEvery2Seconds(i) {
     setTimeout(() => {
@@ -156,7 +156,7 @@ function updateSubscriptionWithNotification(subscription, callback) {
 function updateSubscriptionWithOrderDetails(subscription, orderId, orderDate, nextOrderDate, callback) {
   subscription.numOfOrder = subscription.numOfOrder + 1;
   //subscription.nextOrderCutoffDate = nextOrderDate;
-  subscription.nextOrderPlaceTime = ((new Date).getTime())+ 60 * 60 * 1000;;
+  subscription.nextOrderPlaceDate = ((new Date).getTime())+ 60 * 60 * 1000;;
   subscription.lastOrderDate = orderDate;
   subscription.lastOrderId = orderId;
   console.log("SAving " + JSON.stringify(subscription));

@@ -39,7 +39,7 @@ function deductMoney(user, amount, callback) {
 
 function getBalance(user, callback) {
   getUserWallet(user,function(wallet) {
-    return wallet.balance;
+    callback(wallet.balance);
   });
 }
 
