@@ -46,18 +46,26 @@ function renderCartPage() {
     if(deList.length != 0) {
         deListB = true;
         renderDePage();
+    } else {
+        document.getElementById("deCartId").remove();
     }
     if(gList.length != 0) {
         gListB = true;
         renderGPage();
+    } else {
+        document.getElementById("groceryCartId").remove();
     }
     if(rList.length != 0) {
         rListB = true;
         renderRPage();
+    }  else {
+         document.getElementById("restaurantsCartId").remove();
     }
     if(mList.length != 0) {
         mListB = true;
         renderMPage();
+    }  else {
+        document.getElementById("medicineCartId").remove();
     }
     
     console.log("bool", mList);
@@ -172,6 +180,7 @@ function placeOrder() {
         grData['items'] = gList;
         placeOrderCall(grData);
     }
+    localStorage.setItem("asins","");
 }
 
 function placeOrderCall(data) {
