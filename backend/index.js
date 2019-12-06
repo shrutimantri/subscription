@@ -58,10 +58,23 @@ const createSubscriptionHandler = (request, response) => {
   response.status(200).send(JSON.stringify(testResponse));
 }
 
+const balanceHandler = (request, response) => {
+  console.log(request.url)
+  console.log(JSON.stringify(request.body));
+  var responseData = {"balance" : data};
+  apb.getBalance("user", function(data) {
+    response.status(200).send(JSON.stringify(responseData));
+
+  })
+}
+
 
 app.listen(process.env.PORT || port, () => console.info('Application running on port 8000'));
 
 app.get('/getAllItems', getAllItemsViewRequestHandler);
+
+app.get('/balance', balanceHandler);
+
 
 app.post('/receiveMessage', receiveMessageHandler);
 

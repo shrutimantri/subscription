@@ -40,7 +40,15 @@ function createSubscription(subscription) {
 //Place the first order.
 //Save in dynamo.
   subscription.id = uuidv1();
-  subscription.nextOrderPlaceDate = (new Date()).getTime();
+  if(subscription.category == "DAILY_ESSENTIALS") {
+    subscription.nextOrderPlaceDate = (new Date()).getTime() + 2 * 60 * 1000;
+    subscription.nextOrderCutoffDate =(new Date()).getTime() + 60 * 1000
+
+  } else {
+    subscription.nextOrderPlaceDate = (new Date()).getTime() + 15 * 60 * 1000;
+    subscription.nextOrderCutoffDate =(new Date()).getTime() + 14 * 60 * 1000
+
+  }
   subscription.numOfOrder = 0;
   var totalCost = 0;
   for(var i=0; i<subscription.items.length;i++) {

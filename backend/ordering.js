@@ -55,7 +55,7 @@ var subscriptionData = {
 
 
 
-subscriptionManager.createSubscription(subscriptionData);
+//subscriptionManager.createSubscription(subscriptionData);
 
 callEvery2Seconds(0);
 
@@ -68,8 +68,10 @@ function callEvery2Seconds(i) {
 
               subscriptionList.forEach(function(subscription){
                 var timeNow = (new Date()).getTime();
-                console.log('NEXT ORDER PLACE TIME ' + subscription.nextOrderPlaceDate +  "TIME NOW " + timeNow + " FOR " + subscription);
-                if(subscription.nextOrderPlaceDate < timeNow) {
+                console.log('NEXT ORDER PLACE TIME ' + subscription.nextOrderCutoffDate +  "TIME NOW " + timeNow + " FOR " + subscription);
+                if(subscription.nextOrderCutoffDate < timeNow) {
+                  notifyCustomerForOrderUpdate(subscription)
+                } else if(subscription.nextOrderPlaceDate < timeNow) {
                   placeOrder(subscription);
                 }
             });
@@ -129,7 +131,6 @@ function placeOrder(subscription) {
   }
   );
 
-  notifyCustomerForOrderUpdate(subscription)
   //deduct money.
   //notify customer of order placement.
 
@@ -143,9 +144,17 @@ function generateOrderId() {
   return "D01-" + uuidv1();
 }
 
+function updateSubscriptionWithNotification(subscription, nextOrderCutoff, callback) {
+  subscription.nextOrderCutoffDate = ((new Date).getTime())+ 60 * 60 * 1000;;
+  subscriptionManager.persistSubscription(subscription, function(data) {
+    callback(data);
+  })
+}
+
 function updateSubscriptionWithOrderDetails(subscription, orderId, orderDate, nextOrderDate, callback) {
   subscription.numOfOrder = subscription.numOfOrder + 1;
-  subscription.nextOrderPlaceDate = nextOrderDate;
+  //subscription.nextOrderCutoffDate = nextOrderDate;
+  subscription.nextOrderPlaceTime = ((new Date).getTime())+ 60 * 60 * 1000;;
   subscription.lastOrderDate = orderDate;
   subscription.lastOrderId = orderId;
   console.log("SAving " + JSON.stringify(subscription));
