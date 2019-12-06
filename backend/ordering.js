@@ -57,7 +57,7 @@ var subscriptionData = {
 
 //subscriptionManager.createSubscription(subscriptionData);
 
-//callEvery2Seconds(0);
+callEvery2Seconds(0);
 
 function callEvery2Seconds(i) {
     setTimeout(() => {
