@@ -15,7 +15,7 @@ getText = function(url, callback) // How can I use this callback?
 function mycallback(data) {
    console.log("mycallback called");
    balance = JSON.parse(data)
-   document.getElementById("aPayBalance").innerHTML = balance["balance"];
+   document.getElementById("aPayBalance").innerHTML = '₹ ' + balance["balance"];
 }
 
 getText('https://serene-mesa-07102.herokuapp.com/balance', mycallback);
