@@ -28,10 +28,7 @@ var getOAuthKey = function(accountSid, callback) {
 var client
 getOAuthKey(accountSid, function(data) {
   client = require('twilio')(accountSid, data.token);
-
 })
-
-setTimeout(function(){sendMessage("aaa")}, 3000)
 
 
 function sendMessage(msg) {
