@@ -7,6 +7,8 @@ var gList;
 var rList; 
 var mList; 
 
+var totalAmount = 0;
+
 
     
 var gData = {
@@ -41,6 +43,8 @@ function renderCartPage() {
     rList = categoryList(asinList, "RESTAURANTS");
     mList = categoryList(asinList, "MEDICINES");
     
+    calculateAmount();
+    
     console.log(deList, gList, rList, mList);
     
     var startHtml='<table class="table"><thead class="thead-primary">';
@@ -73,6 +77,32 @@ function renderCartPage() {
     console.log("bool", mList);
     
 }
+
+function calculateAmount() {
+    deList = categoryList(asinList, "DAILY_ESSENTIALS");
+    gList = categoryList(asinList, "GROCERY");
+    rList = categoryList(asinList, "RESTAURANTS");
+    mList = categoryList(asinList, "MEDICINES");
+    
+    console.log(gList);
+    for(var i = 0; i < deList.length; ++i) {
+        totalAmount += parseInt(deList[i]['price']);
+    }
+    for(var i = 0; i < gList.length; ++i) {
+        totalAmount += parseInt(gList[i]['price']);
+    }
+    for(var i = 0; i < rList.length; ++i) {
+        totalAmount += parseInt(rList[i]['price']);
+    }
+    for(var i = 0; i < mList.length; ++i) {
+        totalAmount += parseInt(mList[i]['price']);
+    }
+    
+    document.getElementById("aPayAmount").innerHTML = '₹'+totalAmount;
+    document.getElementById("aPayTotalAmount").innerHTML = '₹'+totalAmount;
+
+}
+
 
 renderCartPage();
 
