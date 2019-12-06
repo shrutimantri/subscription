@@ -134,6 +134,9 @@ function placeOrder(subscription) {
 
     }
   );
+  var messageString = "Your order is on your way for delivery and is expected to reach by 4:30 PM today."
+
+  whatsapp.sendMessage(messageString);
 
     //telegram.sendMessage("Your order with orderID "  + orderId + "is on the way" + " Your order is expected to be delivered in next 1 hour");
   }
