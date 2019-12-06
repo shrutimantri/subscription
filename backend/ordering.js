@@ -127,7 +127,7 @@ function placeOrder(subscription) {
   console.log("Placing order for " + subscription);
   //generateOrderId
   var orderId = generateOrderId();
-  updateSubscriptionWithOrderDetails(subscription, orderId , subscription.orderIntervalInDays),
+  updateSubscriptionWithOrderDetails(subscription, orderId , subscription.orderIntervalInDays,
   function(data1) {
 
     apb.deductMoney(subscription.userId, subscription.total, function(data2) {
