@@ -3374,6 +3374,11 @@ input[type="button"].btn-block {
   margin-bottom: 0;
   list-style: none; }
 
+.nav-image {
+    height: 70px;
+    width: 50px;
+}
+
 .nav-link {
   display: block;
   padding: 0.5rem 1rem; }
