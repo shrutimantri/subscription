@@ -39,7 +39,7 @@ getSubscriptionById("cfee63b0-172f-11ea-a7de-51aa20a1329e", function(data) {
 function createSubscription(subscription) {
 //Place the first order.
 //Save in dynamo.
-  subscription.id = uuidv();
+  subscription.id = uuidv1();
   subscription.nextOrderPlaceDate = (new Date()).getTime();
   subscription.numOfOrder = 0;
   var totalCost = 0;
