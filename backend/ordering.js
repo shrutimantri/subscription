@@ -75,7 +75,7 @@ function callEvery2Seconds(i) {
                     placeOrder(subscription);
                   }
               });
-                
+
               }
         });
 
@@ -99,7 +99,7 @@ function notifyCustomerForOrderUpdate(subscription) {
   var messageString = "Your subscription for " + getItemDisplay(subscription) + " is ready to be shipped in the next 1 hours." +
   "\nReply 1 to cancel the order.\nReply 2 to continue the order."
   store.set('communicationSubscription', subscription);
-
+  updateSubscriptionWithNotification(subscription, function(data) {})
   whatsapp.sendMessage(messageString);
 
 }
@@ -146,7 +146,7 @@ function generateOrderId() {
   return "D01-" + uuidv1();
 }
 
-function updateSubscriptionWithNotification(subscription, nextOrderCutoff, callback) {
+function updateSubscriptionWithNotification(subscription, callback) {
   subscription.nextOrderCutoffDate = ((new Date).getTime())+ 60 * 60 * 1000;;
   subscriptionManager.persistSubscription(subscription, function(data) {
     callback(data);
