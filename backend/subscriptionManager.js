@@ -41,7 +41,7 @@ function createSubscription(subscription) {
 //Save in dynamo.
   subscription.id = uuidv1();
   if(subscription.category == "DAILY_ESSENTIALS") {
-    subscription.nextOrderPlaceDate = (new Date()).getTime() + 2 * 60 * 1000;
+    subscription.nextOrderPlaceDate = (new Date()).getTime() + 150 * 1000;
     subscription.nextOrderCutoffDate =(new Date()).getTime() + 60 * 1000
 
   } else {
