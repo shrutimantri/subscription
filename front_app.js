@@ -47,8 +47,7 @@ app.get("/cart.html", function(request, response){
 })
 
 var extServerOptions = {
-    host: 'localhost',
-    port: '8000',
+    host: 'https://serene-mesa-07102.herokuapp.com',
     path: '/getAllItems',
     method: 'GET'
 };
